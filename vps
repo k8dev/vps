@@ -33,7 +33,7 @@ boot
 17.# cd /root/disk
 18.# mkdir wincd
 
-19.# wget -O win10.iso https://bit.ly/
+19.# wget -O win10.iso https://bit.ly/w11abcd
 
 20.# mount -o loop win10.iso wincd
 21.# rsync -avz --progress wincd/* /mnt
