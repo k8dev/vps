@@ -1,0 +1,49 @@
+1.$ sudo su
+2.# apt update && apt install gparted filezilla grub2 wimtools -y
+4.# gdisk /dev/sda
+
+5. r
+6. g
+7. p
+8. w
+9. Y
+
+10.# mount /dev/sda1 /mnt
+11.# cd ~
+12.# mkdir disk
+13.# mount /dev/sda2 disk
+14.# grub-install --root-directory=/mnt /dev/sda
+15.# cd /mnt/boot/grub
+16.# nano grub.cfg
+
+#grub.cfg-------------------------------
+
+menuentry "Windows installer" {
+insmod ntfs
+search --set=root --file= /bootmgr
+ntldr /bootmgr
+boot
+}
+
+--------------------------------------
+
+17.# cd /root/disk
+18.# mkdir wincd
+
+19.# wget -O win10.iso https://bit.ly/
+
+20.# mount -o loop win10.iso wincd
+21.# rsync -avz --progress wincd/* /mnt
+22.# umount wincd
+
+23.# wget -O virtio.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.221-1/virtio-win.iso
+
+24.# mount -o loop virtio.iso wincd
+25.# mkdir /mnt/sources/virtio
+26.# rsync -avz --progress wincd/* /mnt/sources/virtio
+27.# cd /mnt/sources
+28.# touch cmd.txt
+29.# echo 'add virtio /virtio_drivers' >> cmd.txt
+30.# wimlib-imagex update boot.wim 2 < cmd.txt
+
+# reboot
