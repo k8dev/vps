@@ -1,5 +1,8 @@
 1.$ sudo su
 2.# apt update && apt install gparted filezilla grub2 wimtools -y
+
+3.# gparted
+
 4.# gdisk /dev/sda
 
 5. r
